@@ -212,5 +212,5 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
-MxnetExamples/NceLoss/data/text8/
+MxnetExamples/NceLoss/data/text8
 MxnetExamples/SSD/model/*
