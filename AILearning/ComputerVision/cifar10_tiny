@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>CIFAR-10 - Object Recognition in Images | Kaggle</title>
+    <meta charset="utf-8" />
+    <meta name="robots" content="index, follow" />
+    <meta name="description" content="Identify the subject of 60,000 labeled images" />
+    <meta name="turbolinks-cache-control" content="no-cache" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
+    <meta name="theme-color" content="#008ABC" />
+    <script nonce="33Vamtf2&#x2B;Dy7FflY0A4ayQ==" type="text/javascript">
+        window["initialPageLoadStartTime"] = new Date().getTime();
+    </script>
+    <link rel="preconnect" href="https://www.google-analytics.com" crossorigin="anonymous" /><link rel="preconnect" href="https://stats.g.doubleclick.net" /><link rel="preconnect" href="https://js.intercomcdn.com" /><link rel="preconnect" href="https://storage.googleapis.com" /><link rel="preconnect" href="https://apis.google.com" /><link rel="preload" href="/static/assets/fontawesome-webfont.woff2" as="font" crossorigin="anonymous" />
+    <link href="/static/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="manifest" href="/static/json/manifest.json">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic" rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/icon?family=Google+Material+Icons" rel="stylesheet" type='text/css' />
+        <link rel="stylesheet" type="text/css" href="/static/assets/vendor.css?v=b529cc09bbd2" />
+        <link rel="stylesheet" type="text/css" href="/static/assets/app.css?v=1355ebff7645" />
+    
+    
+ 
+        <script nonce="33Vamtf2&#x2B;Dy7FflY0A4ayQ==">
+        try{(function(a,s,y,n,c,h,i,d,e){d=s.createElement("style");
+        d.appendChild(s.createTextNode(""));s.head.appendChild(d);d=d.sheet;
+        y=y.map(x => d.insertRule(x + "{ opacity: 0 !important }"));
+        h.start=1*new Date;h.end=i=function(){y.forEach(x => x<d.cssRules.length ? d.deleteRule(x) : {})};
+        (a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
+        })(window,document,['.site-header-react__nav'],'dataLayer',2000,{'GTM-52LNT9S':true});}catch(ex){}
+    </script>
+    <script nonce="33Vamtf2&#x2B;Dy7FflY0A4ayQ==">
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'UA-12629138-1', {
+            'optimize_id': 'GTM-52LNT9S',
+            'displayFeaturesTask': null,
+            'send_page_view': false
+        });
+    </script>
+    <script nonce="33Vamtf2&#x2B;Dy7FflY0A4ayQ==" async src="https://www.googletagmanager.com/gtag/js?id=UA-12629138-1"></script>
+
+    
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@kaggle" />
+        <meta name="twitter:creator" content="@kaggle" />
+    <meta name="og:url" content="https://kaggle.com/c/cifar-10" />
+    <meta name="og:title" content="CIFAR-10 - Object Recognition in Images" />
+    <meta name="og:description" content="Identify the subject of 60,000 labeled images" />
+    <meta name="og:image" content="https://storage.googleapis.com/kaggle-competitions/kaggle/3649/logos/thumb76_76.png" />
+
+
+    
+    
+
+    
+    
+    
+<script nonce="33Vamtf2&#x2B;Dy7FflY0A4ayQ==" type="text/javascript">
+    var Kaggle = Kaggle || {};
+
+    Kaggle.Current = {
+        antiForgeryToken: 'CfDJ8LdUzqlsSWBPr4Ce3rb9VL92IASM2jHlnZIbbJFDBVNAgfq4mqqcXzjDYzZfaUt9oXnQpvPPKb01tPmccM1FDEK5A0pGtoeGZFQN1aObr4fGLVQAA-YyMO57g1bTJvLE72WwX8gTxboNidbB_PUe--4',
+        isAnonymous: true,
+        analyticsToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1Nzg3Mjk5NDcsIlVzZXJJZCI6MH0.j_ZMkRHX3a06JC1TL1WbFnWX6Hjlts-bqSxSQ7RFxKc',
+        analyticsTokenExpiry: 15,
+        internetKernelsEnabled: false,
+        
+        
+        
+        
+        
+        
+        mdeImageUploader: true,
+        
+        
+        
+        
+    }
+        Kaggle.Current.log = function(){};
+        Kaggle.Current.warn = function(){};
+
+    var decodeUserDisplayName = function () {
+        var escapedUserDisplayName = Kaggle.Current.userDisplayNameEscaped || "";
+        try {
+            var textVersion = new DOMParser().parseFromString(escapedUserDisplayName, "text/html").documentElement.textContent;
+            if (textVersion) {
+                return textVersion;
+            }
+        } catch(ex) {}
+        return escapedUserDisplayName;
+    }
+    Kaggle.Current.userDisplayName = decodeUserDisplayName();
+</script>
+
+    
+
+<script nonce="33Vamtf2&#x2B;Dy7FflY0A4ayQ==" type="text/javascript">
+    var Kaggle = Kaggle || {};
+    Kaggle.PageMessages = [];
+</script>
+
+        <script nonce="33Vamtf2&#x2B;Dy7FflY0A4ayQ==" type="text/javascript">
+/* <![CDATA[ */
+goog_snippet_vars = function() {
+    var w = window;
+    w.google_conversion_id = 955616553;
+    w.google_conversion_label = "QSjvCKDksHMQqZrWxwM";
+    w.google_conversion_value = 0.00;
+    w.google_conversion_currency = "USD";
+    w.google_remarketing_only = false;
+    w.google_conversion_language = "en";
+    w.google_conversion_format = "3";
+    w.google_conversion_color = "ffffff";
+}
+// DO NOT CHANGE THE CODE BELOW.
+goog_report_conversion = function(url) {
+    goog_snippet_vars();
+    window.google_conversion_format = "3";
+    var opt = new Object();
+    opt.onload_callback = function() {
+        if (typeof(url) != 'undefined') {
+            window.location = url;
+        }
+    }
+    var conv_handler = window['google_trackConversion'];
+    if (typeof(conv_handler) == 'function') {
+        conv_handler(opt);
+    }
+}
+/* ]]> */
+    </script>
+    <script nonce="33Vamtf2&#x2B;Dy7FflY0A4ayQ==" type="text/javascript"
+            src="//www.googleadservices.com/pagead/conversion_async.js">
+    </script>
+
+
+
+        <script nonce="33Vamtf2&#x2B;Dy7FflY0A4ayQ==">window['useKaggleAnalytics'] = true;</script>
+
+    <script id="gapi-target" nonce="33Vamtf2&#x2B;Dy7FflY0A4ayQ==" src="https://apis.google.com/js/api.js" defer async></script>
+    <script nonce="33Vamtf2+Dy7FflY0A4ayQ==" src="/static/assets/vendor.js?v=6eb49941ea8a" data-turbolinks-track="reload"></script>
+    <script nonce="33Vamtf2+Dy7FflY0A4ayQ==" src="/static/assets/app.js?v=dc24f048b7d0" data-turbolinks-track="reload"></script>
+        <script nonce="33Vamtf2&#x2B;Dy7FflY0A4ayQ==">
+            (function() {
+                if ('serviceWorker' in navigator) {
+                    navigator.serviceWorker.register("/static/assets/service-worker.js").then(function(reg) {
+                        reg.onupdatefound = function() {
+                            var installingWorker = reg.installing;
+                            installingWorker.onstatechange = function() {
+                                switch (installingWorker.state) {
+                                case 'installed':
+                                    if (navigator.serviceWorker.controller) {
+                                        console.log('New or updated content is available.');
+                                    } else {
+                                        console.log('Content is now available offline!');
+                                    }
+                                    break;
+                                case 'redundant':
+                                    console.error('The installing service worker became redundant.');
+                                    break;
+                                }
+                            };
+                        };
+                    }).catch(function(e) {
+                      console.error('Error during service worker registration:', e);
+                    });
+                }
+            })();
+        </script>
+        <script nonce="33Vamtf2&#x2B;Dy7FflY0A4ayQ==" defer src="https://cdn.jsdelivr.net/npm/stackdriver-errors-js@0.7.0/dist/stackdriver-errors-concat.min.js"></script>
+        <script nonce="33Vamtf2&#x2B;Dy7FflY0A4ayQ==" type="text/javascript">
+            window.addEventListener('DOMContentLoaded', function () {
+                var errorHandler = new StackdriverErrorReporter();
+                errorHandler.start({
+                    key: 'AIzaSyDANGXFHtSIVc51MIdGwg4mQFgm3oNrKoo',
+                    projectId: 'kaggle-161607',
+                    service: 'web-fe',
+                    version: 'b1ee25687aea7b13a273ca9af98b8fed21f065dd',
+                    context: { user: '0' }
+                });
+            });
+        </script>
+</head>
+<body class="legacyNav" data-turbolinks="false">
+    <main>
+        
+
+
+
+
+
+
+    <div class="site-layout">
+            <div class="site-layout__header">
+                <div data-component-name="SiteHeaderContainer" style="display: flex; flex-direction: column; flex: 1 0 auto;"></div><script nonce="33Vamtf2+Dy7FflY0A4ayQ==">var Kaggle=window.Kaggle||{};Kaggle.State=Kaggle.State||[];Kaggle.State.push({});performance && performance.mark && performance.mark("SiteHeaderContainer.componentCouldBootstrap");</script>
+            </div>
+
+        <div class="site-layout__main-content">
+            <div data-component-name="CompetitionContainer" style="display: flex; flex-direction: column; flex: 1 0 auto;"></div><script nonce="33Vamtf2+Dy7FflY0A4ayQ==">var Kaggle=window.Kaggle||{};Kaggle.State=Kaggle.State||[];Kaggle.State.push({"competitionId":3649,"competitionType":"prediction","competitionTitle":"CIFAR-10 - Object Recognition in Images","briefDescription":"Identify the subject of 60,000 labeled images","competitionHeaderImageUrl":"/static/images/competition-noimage.png","organizationId":4,"organizationName":"Kaggle","organizationSlug":"kaggle","organizationThumbnailUrl":"https://storage.googleapis.com/kaggle-organizations/4/thumbnail.png","hasAcceptedRules":false,"pageMessages":[],"dateEnabled":"2013-10-18T21:07:23.79Z","deadline":"2014-10-18T23:59:00Z","mergerDeadline":"2014-10-18T23:59:00Z","newEntrantDeadline":null,"rewardQuantity":null,"rewardTypeName":"Knowledge","totalTeams":231,"isTeamCountOverridden":false,"isInClass":false,"hostSegment":"playground","canEdit":false,"canEditMetadata":false,"overview":{"id":5024,"postId":24778,"content":"\u003cp\u003e\u003ca href=\u0022http://www.cs.toronto.edu/~kriz/cifar.html\u0022\u003eCIFAR-10 \u003c/a\u003e\u0026nbsp;is an established computer-vision dataset used for object recognition. It is a subset of the \u003ca href=\u0022http://groups.csail.mit.edu/vision/TinyImages/\u0022\u003e80 million tiny images dataset\u003c/a\u003e and consists of 60,000 32x32 color images containing one of 10 object classes, with 6000 images per class. It was collected by Alex Krizhevsky, Vinod Nair, and Geoffrey Hinton.\u003c/p\u003e\r\n\u003cp\u003eKaggle is hosting a CIFAR-10 leaderboard for the machine learning community to use for fun and practice. You can see how your approach compares to the latest research methods on Rodrigo Benenson\u0027s \u003ca href=\u0022http://rodrigob.github.io/are_we_there_yet/build/classification_datasets_results.html\u0022\u003eclassification results page\u003c/a\u003e.\u003c/p\u003e\r\n\u003cp style=\u0022text-align: center;\u0022\u003e\u003cimg src=\u0022https://storage.googleapis.com/kaggle-competitions/kaggle/3649/media/cifar-10.png\u0022 alt=\u0022CIFAR-10\u0022 width=\u0022363\u0022 height=\u0022366\u0022 /\u003e\u003c/p\u003e\r\n\u003cp\u003ePlease cite this technical report if you use this dataset:\u0026nbsp;\u003ca href=\u0022http://www.cs.toronto.edu/~kriz/learning-features-2009-TR.pdf\u0022\u003eLearning Multiple Layers of Features from Tiny Images\u003c/a\u003e, Alex Krizhevsky, 2009.\u003c/p\u003e","mimeType":"","name":"description","isPublished":false},"rules":{"id":5027,"postId":24781,"content":"\r\n\t\u003c!-- Begin Base Rules --\u003e\r\n    \u003ch3\u003eOne account per participant\u003c/h3\u003e\r\n    \u003cp\u003eYou cannot sign up to Kaggle from multiple accounts and therefore you cannot submit from multiple accounts.\u003c/p\u003e\r\n    \u003ch3\u003eNo private sharing outside teams\u003c/h3\u003e\r\n    \u003cp\u003e\r\n        Privately sharing code or data outside of teams is not permitted.\r\n        It\u0027s okay to share code if made available to all participants on the forums.\r\n    \u003c/p\u003e\r\n    \u003ch3\u003eTeam Mergers\u003c/h3\u003e\r\n    \u003cp\u003e\r\n        Team mergers are allowed and can be performed by the team leader. In order to merge, the combined team must have a total submission count less than or equal to the maximum allowed as of the merge date. The maximum allowed is the number of submissions per day multiplied by the number of days the competition has been running.\u003cbr/\u003e\r\n    \u003c/p\u003e\r\n\r\n    \u003ch3\u003eTeam Limits\u003c/h3\u003e\r\n    \u003cp\u003eThere is no maximum team size.\u003c/p\u003e\r\n    \u003ch3\u003eSubmission Limits\u003c/h3\u003e\r\n    \u003cp\u003eYou may submit a maximum of 10 entries per day.\u003c/p\u003e\r\n    \u003cp\u003eYou may select up to 2 final submissions for judging.\u003c/p\u003e\r\n    \u003ch3\u003eCompetition Timeline\u003c/h3\u003e\r\n    \u003cp\u003eStart Date: \u003cstrong\u003e10/18/2013 9:07 PM UTC\u003c/strong\u003e\u003c/p\u003e\r\n    \u003cp\u003eMerger Deadline: \u003cstrong\u003eNone\u003c/strong\u003e\u003c/p\u003e\r\n    \u003cp\u003eEntry Deadline: \u003cstrong\u003eNone\u003c/strong\u003e\u003c/p\u003e\r\n    \u003cp\u003eEnd Date: \u003cstrong\u003e10/18/2014 11:59 PM UTC\u003c/strong\u003e\u003c/p\u003e\r\n\t\u003c!-- End Base Rules --\u003e\r\n\u003cul\u003e\r\n\u003cli\u003eDue to the public nature of the data, this competition does not count towards Kaggle ranking points.\u003c/li\u003e\r\n\u003cli\u003eWe ask that you respect the spirit of the competition and do not cheat. You should not submit entries based on test-set answers or train your model on the test set. Hand labeling is also forbidden.\u003c/li\u003e\r\n\u003c/ul\u003e","mimeType":"","name":"rules","isPublished":false},"dataIntro":{"id":5023,"postId":24777,"content":"\u003cp\u003eThe CIFAR-10 data consists of 60,000 32x32 color images in 10 classes, with 6000 images per class. There are 50,000 training images and 10,000 test images in the official data. We have preserved the train/test split from the original dataset. \u0026nbsp;The provided files are:\u003c/p\u003e\r\n\u003cp\u003e\u003cstrong\u003etrain.7z\u003c/strong\u003e - a folder containing the training images in png format\u003cbr /\u003e\u003cstrong\u003etest.7z\u003c/strong\u003e - a folder containing the test images in png format\u003cbr /\u003e\u003cstrong\u003etrainLabels.csv\u003c/strong\u003e - the training labels\u003c/p\u003e\r\n\u003cp\u003eTo discourage certain forms of cheating (such as hand labeling) we have added 290,000 junk images in the test set. These images are ignored in the scoring. We have also made trivial modifications to the official 10,000 test images to prevent looking them up by file hash. These modifications should not appreciably affect the scoring. You should predict labels for all 300,000 images.\u003c/p\u003e\r\n\u003cp\u003eThe label classes in the dataset are:\u003c/p\u003e\r\n\u003cul\u003e\r\n\u003cli\u003e\u003cspan style=\u0022font-size: 1em; line-height: 1.5em;\u0022\u003eairplane\u0026nbsp;\u003c/span\u003e\u003c/li\u003e\r\n\u003cli\u003e\u003cspan style=\u0022font-size: 1em; line-height: 1.5em;\u0022\u003eautomobile\u0026nbsp;\u003c/span\u003e\u003c/li\u003e\r\n\u003cli\u003e\u003cspan style=\u0022font-size: 1em; line-height: 1.5em;\u0022\u003ebird\u0026nbsp;\u003c/span\u003e\u003c/li\u003e\r\n\u003cli\u003e\u003cspan style=\u0022font-size: 1em; line-height: 1.5em;\u0022\u003ecat\u0026nbsp;\u003c/span\u003e\u003c/li\u003e\r\n\u003cli\u003e\u003cspan style=\u0022font-size: 1em; line-height: 1.5em;\u0022\u003edeer\u0026nbsp;\u003c/span\u003e\u003c/li\u003e\r\n\u003cli\u003e\u003cspan style=\u0022font-size: 1em; line-height: 1.5em;\u0022\u003edog\u0026nbsp;\u003c/span\u003e\u003c/li\u003e\r\n\u003cli\u003e\u003cspan style=\u0022font-size: 1em; line-height: 1.5em;\u0022\u003efrog\u0026nbsp;\u003c/span\u003e\u003c/li\u003e\r\n\u003cli\u003e\u003cspan style=\u0022font-size: 1em; line-height: 1.5em;\u0022\u003ehorse\u0026nbsp;\u003c/span\u003e\u003c/li\u003e\r\n\u003cli\u003e\u003cspan style=\u0022font-size: 1em; line-height: 1.5em;\u0022\u003eship\u0026nbsp;\u003c/span\u003e\u003c/li\u003e\r\n\u003cli\u003e\u003cspan style=\u0022font-size: 1em; line-height: 1.5em;\u0022\u003etruck\u003c/span\u003e\u003c/li\u003e\r\n\u003c/ul\u003e\r\n\u003cp\u003eThe classes are completely mutually exclusive. There is no overlap between automobiles and trucks. \u0022Automobile\u0022 includes sedans, SUVs, things of that sort. \u0022Truck\u0022 includes only big trucks. Neither includes pickup trucks.\u003c/p\u003e","mimeType":"","name":"data-description","isPublished":false},"evaluation":null,"prizes":null,"competitionSlug":"cifar-10","numPrizes":1,"leaderboardPercentage":100,"hasHeaderImage":false,"hasLimitedParticipation":false,"hasScripts":true,"acceptRulesUrl":"/c/cifar-10/rules/accept.json?doAccept=True","setFinalScoreSubmissionsUrl":"/c/cifar-10/submissions/final.json","updateSubmissionUrl":"/c/cifar-10/submissions/update.json","newScriptUrl":"/kernels/scripts/new?competitionId=3649","addImageUrl":null,"discussion":{"canDownvote":false,"dataUrl":"/forums/329/topics.json","id":329,"isRootLevel":false,"showSubscribeButton":false,"isSubscribed":false,"subscription":"unsubscribe","initialTopics":null,"paramValues":{"category":"all","page":1,"search":null,"group":"all","sortBy":"hot"}},"competitionThumbnailImageUrl":"https://storage.googleapis.com/kaggle-competitions/kaggle/3649/logos/thumb76_76.png","competitionFrontPageImageUrl":"https://storage.googleapis.com/kaggle-competitions/kaggle/3649/logos/front_page.png","submissionStatusUrl":"/c/cifar-10/submissions/status.json","newTopic":{"allowAttachments":false,"authorRanking":null,"authorTier":"novice","authorType":"topic","forumId":329,"parentName":"CIFAR-10 - Object Recognition in Images","parentUrl":"/c/cifar-10"},"numScoredSubmissions":2,"maxDailySubmissions":10,"maxDailySubmissionsResetDate":"2020-01-12T00:00:00Z","remainingDailySubmissions":null,"totalSolutionRows":300000,"team":null,"maxTeamSize":null,"topicTitle":null,"topicId":null,"saveOverviewUrl":"/c/cifar-10/overview.json","saveRulesUrl":"/c/cifar-10/rules.json","saveDataUrl":"/c/cifar-10/data.json","totalCompetitors":292,"totalEntries":1632,"countsTowardsRanking":false,"countsTowardsTiers":false,"evaluationAlgorithm":{"id":14,"name":"Categorization Accuracy","description":"Percentage of correctly categorized items","submissionFileFormatId":null,"competitionId":null,"isMax":true,"requiresSameRowCountInSubmissionAndSolution":true},"submissionUploadUrl":null,"submissionSubmitUrl":"/c/cifar-10/submission.json","totalDiscussions":31,"totalKernels":0,"allowPrivateLeaderboardDisplay":true,"isCreatingCompetition":false,"pages":[{"id":5024,"postId":24778,"content":"\u003cp\u003e\u003ca href=\u0022http://www.cs.toronto.edu/~kriz/cifar.html\u0022\u003eCIFAR-10 \u003c/a\u003e\u0026nbsp;is an established computer-vision dataset used for object recognition. It is a subset of the \u003ca href=\u0022http://groups.csail.mit.edu/vision/TinyImages/\u0022\u003e80 million tiny images dataset\u003c/a\u003e and consists of 60,000 32x32 color images containing one of 10 object classes, with 6000 images per class. It was collected by Alex Krizhevsky, Vinod Nair, and Geoffrey Hinton.\u003c/p\u003e\n\u003cp\u003eKaggle is hosting a CIFAR-10 leaderboard for the machine learning community to use for fun and practice. You can see how your approach compares to the latest research methods on Rodrigo Benenson\u0027s \u003ca href=\u0022http://rodrigob.github.io/are_we_there_yet/build/classification_datasets_results.html\u0022\u003eclassification results page\u003c/a\u003e.\u003c/p\u003e\n\u003cp style=\u0022text-align: center\u0022\u003e\u003cimg src=\u0022https://storage.googleapis.com/kaggle-competitions/kaggle/3649/media/cifar-10.png\u0022 alt=\u0022CIFAR-10\u0022 width=\u0022363\u0022 height=\u0022366\u0022\u003e\u003c/p\u003e\n\u003cp\u003ePlease cite this technical report if you use this dataset:\u0026nbsp;\u003ca href=\u0022http://www.cs.toronto.edu/~kriz/learning-features-2009-TR.pdf\u0022\u003eLearning Multiple Layers of Features from Tiny Images\u003c/a\u003e, Alex Krizhevsky, 2009.\u003c/p\u003e","mimeType":"","name":"description","isPublished":true},{"id":5025,"postId":24779,"content":"\u003cp\u003eSubmissions are evaluated on classification accuracy (the percent of labels that are predicted correctly).\u003c/p\u003e\n\u003ch2\u003eSubmission Format\u003c/h2\u003e\n\u003cp\u003eFor each image in the test set, predict a label for the given id. Your labels must match the official labels exactly {airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck}.\u0026nbsp;Your submission should have a header.\u003c/p\u003e\n\u003cpre\u003eid,label\n1,cat\n2,cat\n3,cat\n4,cat\n...\n\u003c/pre\u003e","mimeType":"","name":"evaluation","isPublished":true}],"files":[{"id":0,"name":"sampleSubmission.csv","description":null,"totalBytes":3188904,"url":null,"previewUrl":null,"supersededById":null,"dateCreated":"2018-06-27T07:43:30.8589153Z"},{"id":0,"name":"test.7z","description":null,"totalBytes":639374249,"url":null,"previewUrl":null,"supersededById":null,"dateCreated":"2018-06-27T07:43:30.8589153Z"},{"id":0,"name":"trainLabels.csv","description":null,"totalBytes":588903,"url":null,"previewUrl":null,"supersededById":null,"dateCreated":"2018-06-27T07:43:30.8589153Z"},{"id":0,"name":"train.7z","description":null,"totalBytes":109723070,"url":null,"previewUrl":null,"supersededById":null,"dateCreated":"2018-06-27T07:43:30.8589153Z"}],"databundle":{"id":46718,"databundleId":35934,"databundleVersionType":"fileset","databundleDiffType":"versioned","versionNumber":1,"zipBlobFileId":0,"totalSize":750146648,"ownerInfo":{"databundleVersionId":46718,"dataset":null,"competition":{"competitionId":3649,"dataviewToken":null,"scope":"c/cifar-10"},"kernel":null,"previewsDisabled":true},"usesArchiveV2":true,"hasBundleDownload":true,"type":"databundleVersion","collapsed":false,"info":{"metrics":null,"archiveInfo":null,"archiveInfoV2":null,"blobFileInfo":null,"convertCsvInfo":null,"kernelReference":null},"settings":{"csvSettings":null,"bigQuerySettings":null,"bigQueryMirrorSettings":null,"storageSettings":{"webDataLocation":{"bucket":"kaggle-competitions-data","path":"kaggle-v2/3649/46718/upload"},"sdsDataLocation":{"bucket":"kagglesdsdata","path":"competitions/3649/46718"},"responseDataLocation":null},"remoteUrlSettings":null,"remoteGithubSettings":null},"render":null,"totalChildren":0,"children":[{"id":0,"blobFileId":0,"databundleVersionId":46718,"databundleVersionObjectType":"file","url":null,"relativePath":"sampleSubmission.csv","creationDate":null,"isDummy":false,"size":3188904,"fullPath":"sampleSubmission.csv","previewUrl":null,"downloadUrl":"/c/cifar-10/download/ZzaLBGXHcyI9NWesPDjN%2Fversions%2FILVbXkXo6EgGYk6s3Ir1%2Ffiles%2FsampleSubmission.csv","fileType":".csv","contentLength":3188904,"contentType":"text/csv","contentMD5":"uFNA+kKphFHxNb6WGwPB+A==","validationErrors":null,"type":"databundleVersionObject","collapsed":false,"info":{"metrics":null,"archiveInfo":null,"archiveInfoV2":null,"blobFileInfo":null,"convertCsvInfo":null,"kernelReference":null},"settings":{"csvSettings":null,"bigQuerySettings":null,"bigQueryMirrorSettings":null,"storageSettings":null,"remoteUrlSettings":null,"remoteGithubSettings":null},"render":null,"totalChildren":2,"children":[{"columns":[{"order":0,"originalType":"","type":"numeric","extendedType":"id","isNullable":null,"isPrimaryKey":null,"isLabel":null,"info":{"metrics":{"finiteCount":300000,"infiniteCount":0,"mean":150000.5,"standardDeviation":86602.54037796274,"minimum":1.0,"minimumFinite":1.0,"maximum":300000.0,"maximumFinite":300000.0,"quantiles":[{"point":0.25,"value":75001.0},{"point":0.5,"value":150001.0},{"point":0.75,"value":225001.0}],"histogram":{"buckets":[{"index":0,"label":"1.00 - 6000.98","leftValue":"-Infinity","rightValue":6000.98,"count":6000},{"index":1,"label":"6000.98 - 12000.96","leftValue":6000.98,"rightValue":12000.96,"count":6000},{"index":2,"label":"12000.96 - 18000.94","leftValue":12000.96,"rightValue":18000.94,"count":6000},{"index":3,"label":"18000.94 - 24000.92","leftValue":18000.94,"rightValue":24000.92,"count":6000},{"index":4,"label":"24000.92 - 30000.90","leftValue":24000.92,"rightValue":30000.899999999998,"count":6000},{"index":5,"label":"30000.90 - 36000.88","leftValue":30000.899999999998,"rightValue":36000.88,"count":6000},{"index":6,"label":"36000.88 - 42000.86","leftValue":36000.88,"rightValue":42000.86,"count":6000},{"index":7,"label":"42000.86 - 48000.84","leftValue":42000.86,"rightValue":48000.84,"count":6000},{"index":8,"label":"48000.84 - 54000.82","leftValue":48000.84,"rightValue":54000.81999999999,"count":6000},{"index":9,"label":"54000.82 - 60000.80","leftValue":54000.81999999999,"rightValue":60000.799999999996,"count":6000},{"index":10,"label":"60000.80 - 66000.78","leftValue":60000.799999999996,"rightValue":66000.78,"count":6000},{"index":11,"label":"66000.78 - 72000.76","leftValue":66000.78,"rightValue":72000.76,"count":6000},{"index":12,"label":"72000.76 - 78000.74","leftValue":72000.76,"rightValue":78000.73999999999,"count":6000},{"index":13,"label":"78000.74 - 84000.72","leftValue":78000.73999999999,"rightValue":84000.72,"count":6000},{"index":14,"label":"84000.72 - 90000.70","leftValue":84000.72,"rightValue":90000.7,"count":6000},{"index":15,"label":"90000.70 - 96000.68","leftValue":90000.7,"rightValue":96000.68,"count":6000},{"index":16,"label":"96000.68 - 102000.66","leftValue":96000.68,"rightValue":102000.65999999999,"count":6000},{"index":17,"label":"102000.66 - 108000.64","leftValue":102000.65999999999,"rightValue":108000.63999999998,"count":6000},{"index":18,"label":"108000.64 - 114000.62","leftValue":108000.63999999998,"rightValue":114000.62,"count":6000},{"index":19,"label":"114000.62 - 120000.60","leftValue":114000.62,"rightValue":120000.59999999999,"count":6000},{"index":20,"label":"120000.60 - 126000.58","leftValue":120000.59999999999,"rightValue":126000.57999999999,"count":6000},{"index":21,"label":"126000.58 - 132000.56","leftValue":126000.57999999999,"rightValue":132000.56,"count":6000},{"index":22,"label":"132000.56 - 138000.54","leftValue":132000.56,"rightValue":138000.53999999998,"count":6000},{"index":23,"label":"138000.54 - 144000.52","leftValue":138000.53999999998,"rightValue":144000.52,"count":6000},{"index":24,"label":"144000.52 - 150000.50","leftValue":144000.52,"rightValue":150000.5,"count":6000},{"index":25,"label":"150000.50 - 156000.48","leftValue":150000.5,"rightValue":156000.47999999998,"count":6000},{"index":26,"label":"156000.48 - 162000.46","leftValue":156000.47999999998,"rightValue":162000.46,"count":6000},{"index":27,"label":"162000.46 - 168000.44","leftValue":162000.46,"rightValue":168000.44,"count":6000},{"index":28,"label":"168000.44 - 174000.42","leftValue":168000.44,"rightValue":174000.41999999998,"count":6000},{"index":29,"label":"174000.42 - 180000.40","leftValue":174000.41999999998,"rightValue":180000.4,"count":6000},{"index":30,"label":"180000.40 - 186000.38","leftValue":180000.4,"rightValue":186000.37999999998,"count":6000},{"index":31,"label":"186000.38 - 192000.36","leftValue":186000.37999999998,"rightValue":192000.36,"count":6000},{"index":32,"label":"192000.36 - 198000.34","leftValue":192000.36,"rightValue":198000.34,"count":6000},{"index":33,"label":"198000.34 - 204000.32","leftValue":198000.34,"rightValue":204000.31999999998,"count":6000},{"index":34,"label":"204000.32 - 210000.30","leftValue":204000.31999999998,"rightValue":210000.3,"count":6000},{"index":35,"label":"210000.30 - 216000.28","leftValue":210000.3,"rightValue":216000.27999999997,"count":6000},{"index":36,"label":"216000.28 - 222000.26","leftValue":216000.27999999997,"rightValue":222000.25999999998,"count":6000},{"index":37,"label":"222000.26 - 228000.24","leftValue":222000.25999999998,"rightValue":228000.24,"count":6000},{"index":38,"label":"228000.24 - 234000.22","leftValue":228000.24,"rightValue":234000.21999999997,"count":6000},{"index":39,"label":"234000.22 - 240000.20","leftValue":234000.21999999997,"rightValue":240000.19999999998,"count":6000},{"index":40,"label":"240000.20 - 246000.18","leftValue":240000.19999999998,"rightValue":246000.18,"count":6000},{"index":41,"label":"246000.18 - 252000.16","leftValue":246000.18,"rightValue":252000.15999999997,"count":6000},{"index":42,"label":"252000.16 - 258000.14","leftValue":252000.15999999997,"rightValue":258000.13999999998,"count":6000},{"index":43,"label":"258000.14 - 264000.12","leftValue":258000.13999999998,"rightValue":264000.12,"count":6000},{"index":44,"label":"264000.12 - 270000.10","leftValue":264000.12,"rightValue":270000.1,"count":6000},{"index":45,"label":"270000.10 - 276000.08","leftValue":270000.1,"rightValue":276000.07999999996,"count":6000},{"index":46,"label":"276000.08 - 282000.06","leftValue":276000.07999999996,"rightValue":282000.06,"count":6000},{"index":47,"label":"282000.06 - 288000.04","leftValue":282000.06,"rightValue":288000.04,"count":6000},{"index":48,"label":"288000.04 - 294000.02","leftValue":288000.04,"rightValue":294000.01999999996,"count":6000},{"index":49,"label":"294000.02 - 300000.00","leftValue":294000.01999999996,"rightValue":"Infinity","count":6000}],"type":"string"},"column":{"order":0,"originalType":null,"type":"numeric","extendedType":"id","isNullable":null,"isPrimaryKey":null,"isLabel":null,"info":null,"firestorePath":"ZzaLBGXHcyI9NWesPDjN/versions/ILVbXkXo6EgGYk6s3Ir1/files/sampleSubmission.csv/columns/ylmUyjk6cvW23vXeRbSy","firestoreKey":"ylmUyjk6cvW23vXeRbSy","name":"id","description":null},"type":"numeric","extendedType":"id","exception":null,"nullCount":0,"nonNullCount":300000,"validCount":300000,"invalidCount":0}},"firestorePath":"ZzaLBGXHcyI9NWesPDjN/versions/ILVbXkXo6EgGYk6s3Ir1/files/sampleSubmission.csv/columns/ylmUyjk6cvW23vXeRbSy","firestoreKey":"ylmUyjk6cvW23vXeRbSy","name":"id","description":null},{"order":1,"originalType":"","type":"string","extendedType":null,"isNullable":null,"isPrimaryKey":null,"isLabel":null,"info":{"metrics":{"counts":[{"key":"cat","value":300000}],"uniqueValueCount":1,"mostCommonValue":"cat","mostCommonValueCount":300000,"column":{"order":1,"originalType":null,"type":"string","extendedType":null,"isNullable":null,"isPrimaryKey":null,"isLabel":null,"info":null,"firestorePath":"ZzaLBGXHcyI9NWesPDjN/versions/ILVbXkXo6EgGYk6s3Ir1/files/sampleSubmission.csv/columns/9S2uSdh1rXufngdUK6DN","firestoreKey":"9S2uSdh1rXufngdUK6DN","name":"label","description":null},"type":"string","extendedType":null,"exception":null,"nullCount":0,"nonNullCount":300000,"validCount":300000,"invalidCount":0}},"firestorePath":"ZzaLBGXHcyI9NWesPDjN/versions/ILVbXkXo6EgGYk6s3Ir1/files/sampleSubmission.csv/columns/9S2uSdh1rXufngdUK6DN","firestoreKey":"9S2uSdh1rXufngdUK6DN","name":"label","description":null}],"totalRows":300000,"type":"genericTable","collapsed":true,"info":null,"settings":null,"render":null,"totalChildren":0,"children":[],"firestorePath":null,"firestoreKey":null,"name":"","description":null}],"firestorePath":"ZzaLBGXHcyI9NWesPDjN/versions/ILVbXkXo6EgGYk6s3Ir1/files/sampleSubmission.csv","firestoreKey":"sampleSubmission.csv","name":"sampleSubmission.csv","description":null},{"id":0,"blobFileId":0,"databundleVersionId":46718,"databundleVersionObjectType":"file","url":null,"relativePath":"test.7z","creationDate":null,"isDummy":false,"size":639374249,"fullPath":"test.7z","previewUrl":null,"downloadUrl":"/c/cifar-10/download/ZzaLBGXHcyI9NWesPDjN%2Fversions%2FILVbXkXo6EgGYk6s3Ir1%2Ffiles%2Ftest.7z","fileType":".7z","contentLength":639374249,"contentType":"application/x-7z-compressed","contentMD5":"iFMpRWrbmFgLj/X6W0FRjA==","validationErrors":null,"type":"databundleVersionObject","collapsed":false,"info":{"metrics":null,"archiveInfo":null,"archiveInfoV2":null,"blobFileInfo":null,"convertCsvInfo":null,"kernelReference":null},"settings":{"csvSettings":null,"bigQuerySettings":null,"bigQueryMirrorSettings":null,"storageSettings":null,"remoteUrlSettings":null,"remoteGithubSettings":null},"render":null,"totalChildren":0,"children":[],"firestorePath":"ZzaLBGXHcyI9NWesPDjN/versions/ILVbXkXo6EgGYk6s3Ir1/files/test.7z","firestoreKey":"test.7z","name":"test.7z","description":null},{"id":0,"blobFileId":0,"databundleVersionId":46718,"databundleVersionObjectType":"file","url":null,"relativePath":"train.7z","creationDate":null,"isDummy":false,"size":109723070,"fullPath":"train.7z","previewUrl":null,"downloadUrl":"/c/cifar-10/download/ZzaLBGXHcyI9NWesPDjN%2Fversions%2FILVbXkXo6EgGYk6s3Ir1%2Ffiles%2Ftrain.7z","fileType":".7z","contentLength":109723070,"contentType":"application/x-7z-compressed","contentMD5":"XjeBQM8PfxDFwKK4e9KfMQ==","validationErrors":null,"type":"databundleVersionObject","collapsed":false,"info":{"metrics":null,"archiveInfo":null,"archiveInfoV2":null,"blobFileInfo":null,"convertCsvInfo":null,"kernelReference":null},"settings":{"csvSettings":null,"bigQuerySettings":null,"bigQueryMirrorSettings":null,"storageSettings":null,"remoteUrlSettings":null,"remoteGithubSettings":null},"render":null,"totalChildren":0,"children":[],"firestorePath":"ZzaLBGXHcyI9NWesPDjN/versions/ILVbXkXo6EgGYk6s3Ir1/files/train.7z","firestoreKey":"train.7z","name":"train.7z","description":null},{"id":0,"blobFileId":0,"databundleVersionId":46718,"databundleVersionObjectType":"file","url":null,"relativePath":"trainLabels.csv","creationDate":null,"isDummy":false,"size":588903,"fullPath":"trainLabels.csv","previewUrl":null,"downloadUrl":"/c/cifar-10/download/ZzaLBGXHcyI9NWesPDjN%2Fversions%2FILVbXkXo6EgGYk6s3Ir1%2Ffiles%2FtrainLabels.csv","fileType":".csv","contentLength":588903,"contentType":"text/csv","contentMD5":"tGlwARXmHTS/6b8CKU1YQQ==","validationErrors":null,"type":"databundleVersionObject","collapsed":false,"info":{"metrics":null,"archiveInfo":null,"archiveInfoV2":null,"blobFileInfo":null,"convertCsvInfo":null,"kernelReference":null},"settings":{"csvSettings":null,"bigQuerySettings":null,"bigQueryMirrorSettings":null,"storageSettings":null,"remoteUrlSettings":null,"remoteGithubSettings":null},"render":null,"totalChildren":2,"children":[{"columns":[{"order":0,"originalType":"","type":"numeric","extendedType":"id","isNullable":null,"isPrimaryKey":null,"isLabel":null,"info":{"metrics":{"finiteCount":50000,"infiniteCount":0,"mean":25000.5,"standardDeviation":14433.756726853893,"minimum":1.0,"minimumFinite":1.0,"maximum":50000.0,"maximumFinite":50000.0,"quantiles":[{"point":0.25,"value":12501.0},{"point":0.5,"value":25001.0},{"point":0.75,"value":37501.0}],"histogram":{"buckets":[{"index":0,"label":"1.00 - 2500.95","leftValue":"-Infinity","rightValue":2500.95,"count":2500},{"index":1,"label":"2500.95 - 5000.90","leftValue":2500.95,"rightValue":5000.9,"count":2500},{"index":2,"label":"5000.90 - 7500.85","leftValue":5000.9,"rightValue":7500.849999999999,"count":2500},{"index":3,"label":"7500.85 - 10000.80","leftValue":7500.849999999999,"rightValue":10000.8,"count":2500},{"index":4,"label":"10000.80 - 12500.75","leftValue":10000.8,"rightValue":12500.75,"count":2500},{"index":5,"label":"12500.75 - 15000.70","leftValue":12500.75,"rightValue":15000.699999999999,"count":2500},{"index":6,"label":"15000.70 - 17500.65","leftValue":15000.699999999999,"rightValue":17500.649999999998,"count":2500},{"index":7,"label":"17500.65 - 20000.60","leftValue":17500.649999999998,"rightValue":20000.6,"count":2500},{"index":8,"label":"20000.60 - 22500.55","leftValue":20000.6,"rightValue":22500.55,"count":2500},{"index":9,"label":"22500.55 - 25000.50","leftValue":22500.55,"rightValue":25000.5,"count":2500},{"index":10,"label":"25000.50 - 27500.45","leftValue":25000.5,"rightValue":27500.449999999997,"count":2500},{"index":11,"label":"27500.45 - 30000.40","leftValue":27500.449999999997,"rightValue":30000.399999999998,"count":2500},{"index":12,"label":"30000.40 - 32500.35","leftValue":30000.399999999998,"rightValue":32500.35,"count":2500},{"index":13,"label":"32500.35 - 35000.30","leftValue":32500.35,"rightValue":35000.299999999996,"count":2500},{"index":14,"label":"35000.30 - 37500.25","leftValue":35000.299999999996,"rightValue":37500.25,"count":2500},{"index":15,"label":"37500.25 - 40000.20","leftValue":37500.25,"rightValue":40000.2,"count":2500},{"index":16,"label":"40000.20 - 42500.15","leftValue":40000.2,"rightValue":42500.149999999994,"count":2500},{"index":17,"label":"42500.15 - 45000.10","leftValue":42500.149999999994,"rightValue":45000.1,"count":2500},{"index":18,"label":"45000.10 - 47500.05","leftValue":45000.1,"rightValue":47500.049999999996,"count":2500},{"index":19,"label":"47500.05 - 50000.00","leftValue":47500.049999999996,"rightValue":"Infinity","count":2500}],"type":"string"},"column":{"order":0,"originalType":null,"type":"numeric","extendedType":"id","isNullable":null,"isPrimaryKey":null,"isLabel":null,"info":null,"firestorePath":"ZzaLBGXHcyI9NWesPDjN/versions/ILVbXkXo6EgGYk6s3Ir1/files/trainLabels.csv/columns/fC2KTUsf97zJ1M5I7iK7","firestoreKey":"fC2KTUsf97zJ1M5I7iK7","name":"id","description":null},"type":"numeric","extendedType":"id","exception":null,"nullCount":0,"nonNullCount":50000,"validCount":50000,"invalidCount":0}},"firestorePath":"ZzaLBGXHcyI9NWesPDjN/versions/ILVbXkXo6EgGYk6s3Ir1/files/trainLabels.csv/columns/fC2KTUsf97zJ1M5I7iK7","firestoreKey":"fC2KTUsf97zJ1M5I7iK7","name":"id","description":null},{"order":1,"originalType":"","type":"string","extendedType":null,"isNullable":null,"isPrimaryKey":null,"isLabel":null,"info":{"metrics":{"counts":[{"key":"frog","value":5000},{"key":"truck","value":5000},{"key":"deer","value":5000},{"key":"automobile","value":5000},{"key":"bird","value":5000}],"uniqueValueCount":10,"mostCommonValue":"frog","mostCommonValueCount":5000,"column":{"order":1,"originalType":null,"type":"string","extendedType":null,"isNullable":null,"isPrimaryKey":null,"isLabel":null,"info":null,"firestorePath":"ZzaLBGXHcyI9NWesPDjN/versions/ILVbXkXo6EgGYk6s3Ir1/files/trainLabels.csv/columns/qkP7wo9f4KlI1wOwlPaC","firestoreKey":"qkP7wo9f4KlI1wOwlPaC","name":"label","description":null},"type":"string","extendedType":null,"exception":null,"nullCount":0,"nonNullCount":50000,"validCount":50000,"invalidCount":0}},"firestorePath":"ZzaLBGXHcyI9NWesPDjN/versions/ILVbXkXo6EgGYk6s3Ir1/files/trainLabels.csv/columns/qkP7wo9f4KlI1wOwlPaC","firestoreKey":"qkP7wo9f4KlI1wOwlPaC","name":"label","description":null}],"totalRows":50000,"type":"genericTable","collapsed":true,"info":null,"settings":null,"render":null,"totalChildren":0,"children":[],"firestorePath":null,"firestoreKey":null,"name":"","description":null}],"firestorePath":"ZzaLBGXHcyI9NWesPDjN/versions/ILVbXkXo6EgGYk6s3Ir1/files/trainLabels.csv","firestoreKey":"trainLabels.csv","name":"trainLabels.csv","description":null}],"firestorePath":null,"firestoreKey":null,"name":"CIFAR-10 - Object Recognition in Images","description":"\u003cp\u003eThe CIFAR-10 data consists of 60,000 32x32 color images in 10 classes, with 6000 images per class. There are 50,000 training images and 10,000 test images in the official data. We have preserved the train/test split from the original dataset. \u0026nbsp;The provided files are:\u003c/p\u003e\r\n\u003cp\u003e\u003cstrong\u003etrain.7z\u003c/strong\u003e - a folder containing the training images in png format\u003cbr /\u003e\u003cstrong\u003etest.7z\u003c/strong\u003e - a folder containing the test images in png format\u003cbr /\u003e\u003cstrong\u003etrainLabels.csv\u003c/strong\u003e - the training labels\u003c/p\u003e\r\n\u003cp\u003eTo discourage certain forms of cheating (such as hand labeling) we have added 290,000 junk images in the test set. These images are ignored in the scoring. We have also made trivial modifications to the official 10,000 test images to prevent looking them up by file hash. These modifications should not appreciably affect the scoring. You should predict labels for all 300,000 images.\u003c/p\u003e\r\n\u003cp\u003eThe label classes in the dataset are:\u003c/p\u003e\r\n\u003cul\u003e\r\n\u003cli\u003e\u003cspan style=\u0022font-size: 1em; line-height: 1.5em;\u0022\u003eairplane\u0026nbsp;\u003c/span\u003e\u003c/li\u003e\r\n\u003cli\u003e\u003cspan style=\u0022font-size: 1em; line-height: 1.5em;\u0022\u003eautomobile\u0026nbsp;\u003c/span\u003e\u003c/li\u003e\r\n\u003cli\u003e\u003cspan style=\u0022font-size: 1em; line-height: 1.5em;\u0022\u003ebird\u0026nbsp;\u003c/span\u003e\u003c/li\u003e\r\n\u003cli\u003e\u003cspan style=\u0022font-size: 1em; line-height: 1.5em;\u0022\u003ecat\u0026nbsp;\u003c/span\u003e\u003c/li\u003e\r\n\u003cli\u003e\u003cspan style=\u0022font-size: 1em; line-height: 1.5em;\u0022\u003edeer\u0026nbsp;\u003c/span\u003e\u003c/li\u003e\r\n\u003cli\u003e\u003cspan style=\u0022font-size: 1em; line-height: 1.5em;\u0022\u003edog\u0026nbsp;\u003c/span\u003e\u003c/li\u003e\r\n\u003cli\u003e\u003cspan style=\u0022font-size: 1em; line-height: 1.5em;\u0022\u003efrog\u0026nbsp;\u003c/span\u003e\u003c/li\u003e\r\n\u003cli\u003e\u003cspan style=\u0022font-size: 1em; line-height: 1.5em;\u0022\u003ehorse\u0026nbsp;\u003c/span\u003e\u003c/li\u003e\r\n\u003cli\u003e\u003cspan style=\u0022font-size: 1em; line-height: 1.5em;\u0022\u003eship\u0026nbsp;\u003c/span\u003e\u003c/li\u003e\r\n\u003cli\u003e\u003cspan style=\u0022font-size: 1em; line-height: 1.5em;\u0022\u003etruck\u003c/span\u003e\u003c/li\u003e\r\n\u003c/ul\u003e\r\n\u003cp\u003eThe classes are completely mutually exclusive. There is no overlap between automobiles and trucks. \u0022Automobile\u0022 includes sedans, SUVs, things of that sort. \u0022Truck\u0022 includes only big trucks. Neither includes pickup trucks.\u003c/p\u003e"},"canSeePreviews":false,"databundleVersions":[],"discussionTeaser":[{"title":"Leaderboard score missing","itemUrl":"/c/cifar-10/discussion/37746","totalVotes":0,"totalReplies":2,"date":"2019-12-13T04:22:43.013Z","userDisplayName":"Alpha","userUrl":"/thisisyouralpha"},{"title":"My score not appearing in the leader ship board. Could anyone please help. Its important.","itemUrl":"/c/cifar-10/discussion/121404","totalVotes":0,"totalReplies":0,"date":"2019-12-13T04:21:28.137Z","userDisplayName":"Alpha","userUrl":"/thisisyouralpha"},{"title":"Size of the folders after unzipping","itemUrl":"/c/cifar-10/discussion/65357","totalVotes":0,"totalReplies":3,"date":"2019-10-16T15:04:03.927Z","userDisplayName":"Abhinav Jain","userUrl":"/abhinavjain02"},{"title":"Converting the images to Grayscale ?","itemUrl":"/c/cifar-10/discussion/7168","totalVotes":0,"totalReplies":3,"date":"2019-10-07T10:38:29.46Z","userDisplayName":"","userUrl":""},{"title":"The preprocessed datasets.","itemUrl":"/c/cifar-10/discussion/110706","totalVotes":1,"totalReplies":0,"date":"2019-09-30T14:09:12.057Z","userDisplayName":"Po-Lun Wang","userUrl":"/polunwang"}],"kernelTeaser":[{"title":"Project of classification images","itemUrl":"/elmarouv/project-of-classification-images","totalVotes":0,"totalReplies":0,"date":"2020-01-10T19:08:29.937Z","userDisplayName":"Seyidna ali","userUrl":"/elmarouv"},{"title":"CIFAR-10 object classification CNN-Keras","itemUrl":"/faizanurrahmann/cifar-10-object-classification-cnn-keras","totalVotes":2,"totalReplies":0,"date":"2020-01-08T15:26:37.303Z","userDisplayName":"Faizanur Rahman","userUrl":"/faizanurrahmann"},{"title":"CNN CIFAR10","itemUrl":"/leihao1313/cnn-cifar10","totalVotes":3,"totalReplies":0,"date":"2019-12-29T08:42:52.963Z","userDisplayName":"Hao Lei","userUrl":"/leihao1313"},{"title":"classificationprojet","itemUrl":"/majdaelgarni/classificationprojet","totalVotes":0,"totalReplies":0,"date":"2020-01-03T22:23:05.577Z","userDisplayName":"majda_elgarni","userUrl":"/majdaelgarni"}],"datasetVersions":[],"submissionsAreDisabled":false,"hasLeaderboard":true,"finalLeaderboardHasBeenVerified":true,"witholdFinalLeaderboardUntilItHasBeenVerified":false,"isPrivate":false,"publicLeaderboardMessage":null,"privateLeaderboardMessage":null,"disablePrizeIndicator":true,"hasKernels":true,"hasKernelsEnabled":true,"hasHostEnabled":false,"benchmarks":null,"totalSolutionColumns":3,"hasSolutionFile":true,"hasSampleSubmissionFile":true,"userRankMultiplier":0.0,"solutionUploadUrl":null,"submissionDetailsUpdateUrl":null,"submissionDeleteUrl":null,"benchmarkSubmitUrl":null,"needsPhoneVerification":false,"scoringIsMax":true,"rawDataUrl":"/c/3649/publicleaderboarddata.zip","canSubmitModel":false,"privateLeaderboardIsPublic":true,"acceptModelUrl":"/c/cifar-10/team/model/upload.json","modelFile":null,"newNotebookUrl":"/kernels/notebooks/new?competitionId=3649","finalSubmissionIds":[],"mySubmissionsCount":0,"submissionsPage":0,"submissionsSortBy":"date","submissionsGroup":"all","mostRecentSubmissionStatus":null,"isCompetitionHost":false,"allowAnonymousTeams":false,"allowTeamMergers":true,"hostSegments":[],"hostSegmentTitle":"Playground","canParticipate":false,"privacyOptions":[{"value":"public","label":"Public"},{"value":"limited","label":"Limited"},{"value":"private","label":"Private"}],"isCompetitionPending":false,"competitionHasLaunched":true,"competitionHasEnded":true,"canSeeNewWorldInClassCreation":true,"shareToken":null,"competitionPrivacy":"public","ownerTwitter":"kaggle","externalCompetitionThumbnailImageUrl":"https://storage.googleapis.com/kaggle-competitions/kaggle/3649/logos/thumb76_76.png","competitionUrl":"/c/cifar-10","mergerDeadlineHasPassed":true,"categories":{"categories":[{"id":null,"name":"categorizationaccuracy","displayName":null,"fullPath":null,"listingUrl":null,"tagUrl":null,"fontAwesomeIcon":null,"description":"Percentage of correctly categorized items","isInherited":true,"datasetCount":0,"competitionCount":0,"scriptCount":0,"totalCount":0}],"type":"competition"},"competitionHostClaims":{"readSettings":false,"writeSettings":false,"writeDescriptions":false,"writeDeadline":false,"readSubmissions":false,"writeSubmissions":false,"invalidateSubmissions":false,"rescoreSubmissions":false,"readEvaluation":false,"writeEvaluation":false,"writeTeamVisibility":false,"updateCategory":false,"launchCompetition":false,"writeBenchmarks":false,"writeTeamMergers":false},"newEntrantDeadlineHasPassed":false,"onlyAllowKernelSubmissions":false,"kernelFilters":null,"requiresSameRowCountInSubmissionAndSolution":true,"isOngoingCompetition":false,"canUpdateSelectedSubmissions":false,"enableLazyLeaderboard":false,"hideLeaderboardDelta":true,"rulesRequired":true,"usesSynchronousReruns":false});performance && performance.mark && performance.mark("CompetitionContainer.componentCouldBootstrap");</script>
+<script nonce="33Vamtf2&#x2B;Dy7FflY0A4ayQ==" type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+    preferredFont: "TeX",
+    availableFonts: ["STIX", "TeX"],
+    linebreaks: {
+    automatic: true
+    },
+    EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+    inlineMath: [["\\(", "\\)"], ["\\\\(", "\\\\)"]],
+    displayMath: [["$$", "$$"], ["\\[", "\\]"]],
+    processEscapes: true,
+    ignoreClass: "tex2jax_ignore|dno"
+    },
+    TeX: {
+    noUndefined: {
+    attributes: {
+    mathcolor: "red",
+    mathbackground: "#FFEEEE",
+    mathsize: "90%"
+    }
+    }
+    },
+    Macros: {
+    href: "{}"
+    },
+    skipStartupTypeset: false,
+    messageStyle: "none"
+    });
+</script>
+<script nonce="33Vamtf2&#x2B;Dy7FflY0A4ayQ==" type="text/javascript" async crossorigin="anonymous" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+        </div>
+
+            <div class="site-layout__footer">
+                <footer class="site-footer">
+    <div class="site-footer__content">
+        <div class="site-footer__copyright">
+            <span>&copy; 2020 Kaggle Inc</span>
+        </div>
+        <nav class="site-footer__nav">
+            <a href="/team">Our Team</a>
+            <a href="/terms">Terms</a>
+            <a href="/privacy">Privacy</a>
+            <a href="/contact">Contact/Support</a>
+        </nav>
+        <nav class="site-footer__social">
+            <div data-component-name="SocialIcons" style="display: flex; flex-direction: column; flex: 1 0 auto;"></div><script nonce="33Vamtf2+Dy7FflY0A4ayQ==">var Kaggle=window.Kaggle||{};Kaggle.State=Kaggle.State||[];Kaggle.State.push({});performance && performance.mark && performance.mark("SocialIcons.componentCouldBootstrap");</script>
+        </nav>
+    </div>
+</footer>
+
+            </div>
+    </div>
+
+
+
+
+    </main>
+</body>
+</html>
